@@ -9,7 +9,7 @@ if ($expected -cnotmatch '^[a-f0-9]{40}$' -or $config.upstream.repository -cne '
 $actual = (& git -C $UpstreamDir rev-parse HEAD).Trim().ToLowerInvariant()
 if ($LASTEXITCODE -ne 0 -or $actual -cne $expected) { throw "Upstream SHA mismatch: $actual" }
 $pgVersion = (& (Join-Path $PgRoot 'bin/pg_config.exe') --version).Trim()
-if ($LASTEXITCODE -ne 0 -or $pgVersion -notmatch '^PostgreSQL\s+(15|16|17|18)(?:\.|\s)') {
+if ($LASTEXITCODE -ne 0 -or $pgVersion -notmatch '^PostgreSQL\s+(14|15|16|17|18)(?:\.|\s)') {
     throw "Unsupported PostgreSQL pilot target: $pgVersion"
 }
 $source = Join-Path $UpstreamDir 'wal2json.c'
