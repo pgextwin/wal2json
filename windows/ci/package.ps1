@@ -31,12 +31,13 @@ foreach ($mapping in @(
 }
 $info = @"
 wal2json Windows x64 output plugin (unofficial pgextwin pilot)
-Upstream: $UpstreamRepository
-Ref: $UpstreamRef
-SHA: $sha
+Upstream repository: $UpstreamRepository
+Upstream ref: $UpstreamRef
+Upstream commit: $sha
 Version: $UpstreamVersion
 PostgreSQL major: $PostgreSqlMajor
 PostgreSQL tested: $PostgreSqlMinor
+Architecture: Windows x64
 License: BSD-3-Clause; see LICENSE
 
 Install lib/wal2json.dll in PostgreSQL/lib, set wal_level=logical and configure logical replication slots.
