@@ -8,6 +8,6 @@
 
 wal2jsonはSQL拡張機能ではないため、**`CREATE EXTENSION`は不要**です。論理レプリケーションスロットから利用し、通常の`shared_preload_libraries`も不要です。Windows CIではPostgreSQL起動、スロット作成、INSERT・UPDATE・DELETEのコミット、3種類のJSONデコード検証、スロット削除までを確認しています。
 
-CVE-2026-6471対策を含むPostgreSQL（PG18.6など）では、`output_plugin_libraries`に`wal2json`を明示的に許可する必要があります。`wal_level = logical`、レプリケーションスロット数、実行権限も確認してください。[PostgreSQL公式の論理レプリケーション設定](https://www.postgresql.org/docs/18/runtime-config-replication.html)と[Windows導入ガイド](docs/windows_ja.md)を参照してください。
+CVE-2026-6471対策を含むPostgreSQL（PG18.6など）では、`output_plugin_libraries`に`wal2json`を明示的に許可する必要があります。`wal_level = logical`、レプリケーションスロット数、実行権限も確認してください。[PostgreSQL公式の論理レプリケーション設定](https://www.postgresql.org/docs/18/runtime-config-replication.html)と[pgextwin Pages](https://pgextwin.github.io/website/ja/)の公開要件を参照してください。
 
 PostgreSQL 14の新規ビルドは公式EOLの**2026-11-12**までとし、公開済みZIPはEOL後も履歴として残します。実運用前に対象環境での互換性とセキュリティを検証してください。
