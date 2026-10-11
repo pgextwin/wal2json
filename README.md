@@ -1,13 +1,13 @@
-# wal2json for Windows — pgextwin technical pilot
+# wal2json — Windows x64 binaries (pgextwin)
 
-Unofficial Windows x64 packaging of the [wal2json](https://github.com/eulerto/wal2json) logical decoding output plugin, upstream tag `wal2json_2_6` pinned at commit `75629c2e1e81a12350cc9d63782fc53252185d8d`.
+[日本語](README_ja.md) | English
 
-Targets: PostgreSQL 14, 15, 16, 17 and 18 x64. **PG18 is a hard gate** until compilation, PostgreSQL startup, logical replication slot creation and INSERT/UPDATE/DELETE JSON decoding all pass. The plugin is loaded by PostgreSQL logical decoding; `CREATE EXTENSION` does **not** apply.
+This repository publishes unofficial Windows x64 binaries of the [wal2json](https://github.com/eulerto/wal2json) **2.6** logical-decoding output plugin, pinned to upstream commit `75629c2e1e81a12350cc9d63782fc53252185d8d`.
 
-For PostgreSQL releases with CVE-2026-6471 mitigations (including PG18.6), `output_plugin_libraries` must explicitly include `wal2json` in addition to PostgreSQL's standard output plugins. The isolated CI cluster must set `wal_level=logical`, `max_replication_slots>0` and the whitelist. See https://www.postgresql.org/docs/18/runtime-config-replication.html and https://www.postgresql.org/docs/18/release-18-6.html.
+**Current published release:** [v2.6-windows.1](https://github.com/pgextwin/wal2json/releases/tag/v2.6-windows.1), for PostgreSQL **14–18**. Use the ZIP matching your PostgreSQL major. Check SHA256, SPDX SBOM, Grype and attestations in the [pgextwin Catalog](https://pgextwin.github.io/website/en/). This is not an upstream-official Windows release.
 
-The Windows build only attempts to link the server DLL import library `postgres.lib`; missing imports are genuine compatibility pilot blockers rather than reasons to trust unverified foreign static libraries. Independently verify all actual exports and end-to-end logical decoding.
+Unlike SQL extensions, this output plugin uses **no `CREATE EXTENSION`**. It is loaded through a logical replication slot; no shared preload is required. The Windows CI verifies PostgreSQL startup, slot creation, committed INSERT/UPDATE/DELETE decoding into JSON, assertion of all three change kinds, and slot cleanup. Server-log assertions and SQL extension upgrades do not apply or are not covered.
 
-**Not a public Release.** Do not list this plugin as implemented in Catalog or Website until all required CI and supply-chain evidence passes.
+For PostgreSQL versions containing the CVE-2026-6471 mitigations (including PG18.6), `output_plugin_libraries` must explicitly permit `wal2json`. Enable `wal_level = logical` and allocate sufficient replication slots before use. Review [PostgreSQL replication configuration](https://www.postgresql.org/docs/18/runtime-config-replication.html) and [Windows guidance](docs/windows.md).
 
-PostgreSQL 14 is included only while maintained upstream (official EOL: 2026-11-12). The shared CI resolver automatically stops scheduling PG14 after that date; previously published assets remain historical.
+PostgreSQL 14 is eligible for new builds until **2026-11-12** (EOL); previously published assets remain available as historical downloads. Review compatibility and permissions before deploying a logical decoding plugin in production.
