@@ -3,9 +3,9 @@
   "name": "wal2json",
   "upstream": {
     "repository": "eulerto/wal2json",
-    "ref": "wal2json_2_6",
-    "version": "2.6",
-    "commit": "75629c2e1e81a12350cc9d63782fc53252185d8d"
+    "ref": "wal2json_2_7",
+    "version": "2.7",
+    "commit": "1fd8720d0145fba505822727c30cf0c5cc96f66f"
   },
   "postgresql": {
     "majors": [
