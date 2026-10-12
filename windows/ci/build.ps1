@@ -15,10 +15,28 @@ if ($LASTEXITCODE -ne 0 -or $pgVersion -notmatch '^PostgreSQL\s+(14|15|16|17|18)
 $source = Join-Path $UpstreamDir 'wal2json.c'
 if (-not (Test-Path $source -PathType Leaf)) { throw 'Missing source' }
 $code = Get-Content $source -Raw
-if ($code -notmatch '\bPG_MODULE_MAGIC\b' -or
+
+# Keep the SHA-pinned manifest, upstream ref, string and numeric version in sync.
+# 2.x is the reviewed API family; a future major requires an explicit re-audit.
+$version = [string]$config.upstream.version
+if ($version -cnotmatch '^2\.[0-9]{1,2}$') {
+    throw "Unsupported wal2json version $version; re-audit before compiling"
+}
+if ([string]$config.upstream.ref -cne ('wal2json_' + $version.Replace('.', '_'))) {
+    throw 'Upstream tag does not match the pinned manifest version'
+}
+$expectedVersionNum = 200 + [int]($version.Split('.')[1])
+$versionDefs = [regex]::Matches($code, '(?m)^[ \t]*#[ \t]*define[ \t]+WAL2JSON_VERSION[ \t]+"([^"\r\n]+)"[ \t]*\r?$')
+$numberDefs = [regex]::Matches($code, '(?m)^[ \t]*#[ \t]*define[ \t]+WAL2JSON_VERSION_NUM[ \t]+([0-9]+)[ \t]*\r?$')
+if ($versionDefs.Count -ne 1 -or $numberDefs.Count -ne 1 -or
+    $versionDefs[0].Groups[1].Value -cne $version -or
+    [int]$numberDefs[0].Groups[1].Value -ne $expectedVersionNum) {
+    throw "Upstream version macros do not match pinned version $version"
+}
+if ($code -notmatch '\bPG_MODULE_MAGIC(?:_EXT)?\b' -or
     $code -notmatch '\bPGDLLEXPORT\s+_PG_output_plugin_init\s*\(' -or
-    $code -notmatch '#define\s+WAL2JSON_VERSION\s+"2\.6"') {
-    throw 'Upstream plugin API or version changed; re-audit before compiling'
+    $code -notmatch '(?m)^\s*_PG_output_plugin_init\s*\(OutputPluginCallbacks\s*\*\s*cb\s*\)') {
+    throw 'Upstream plugin API or exports changed; re-audit before compiling'
 }
 $def = Join-Path $UpstreamDir 'pgextwin-exports.def'
 [IO.File]::WriteAllLines($def,[string[]]@('LIBRARY wal2json','EXPORTS','    Pg_magic_func','    _PG_output_plugin_init'),[Text.Encoding]::ASCII)
@@ -58,4 +76,4 @@ foreach ($symbol in @('Pg_magic_func','_PG_output_plugin_init')) {
         throw "Required output plugin export missing: $symbol"
     }
 }
-Write-Host "Built pinned wal2json 2.6 with output plugin entry point"
+Write-Host "Built pinned wal2json $version with output plugin entry point"
