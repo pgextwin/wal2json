@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "pgextwin-historical-bilingual-notes/v1",
+  "repository": "pgextwin/wal2json",
+  "releases": [
+    {
+      "id": 410447206,
+      "tag": "v2.7-windows.1",
+      "tagSha": "1198ff30137ee3fd01a9e168647a7167324bb713",
+      "publishedAt": "2026-10-12T09:46:28Z",
+      "prerelease": false,
+      "oldBody": "# wal2json Windows x64\n\nUnofficial Windows x64 binaries built from per-PostgreSQL SHA-pinned upstream sources. All maintained requested PG majors were smoke-tested; SPDX 2.3 SBOM, report-only Grype, signed provenance, signed SBOM attestations and SHA256SUMS included.\n非公式Windows x64バイナリです。対応するPG14〜18と検証可能な証明を含みます。\n",
+      "newBody": "# wal2json Windows x64\n\n## English\n\nUnofficial Windows x64 binaries built from per-PostgreSQL SHA-pinned upstream sources. All maintained requested PG majors were smoke-tested; SPDX 2.3 SBOM, report-only Grype, signed provenance, signed SBOM attestations and SHA256SUMS included.\n\n## 日本語\n\n非公式Windows x64バイナリです。対応するPG14〜18と検証可能な証明を含みます。\n\nPostgreSQLのメジャーバージョンごとに上流ソースのコミットSHAを固定してビルドした、非公式Windows x64用`wal2json`バイナリです。公開当時の保守対象PG14～18についてスモークテストを実施し、SPDX 2.3 SBOM、Grypeレポート（通知のみ）、署名付きビルド来歴、SBOM Attestation、SHA256SUMSを同梱しています。これらは公開物の出自・整合性確認に利用する資料であり、完全な安全性やインストールの自動認可を意味しません。\n",
+      "assets": [
+        {
+          "id": 633345000,
+          "name": "SHA256SUMS.txt",
+          "size": 1750,
+          "digest": "sha256:6025fa8a59f9f5f6c3933cd79bf397c5ce42786990d166f14e8acf645b2dbc11"
+        },
+        {
+          "id": 633344997,
+          "name": "wal2json-wal2json_2_7-pg14-windows-x64.spdx.json",
+          "size": 2455,
+          "digest": "sha256:b49b29ed56d0902f5590ba748ad604a816d4d2025fd0beee37683bdb903990ea"
+        },
+        {
+          "id": 633344999,
+          "name": "wal2json-wal2json_2_7-pg14-windows-x64.vulnerabilities.json",
+          "size": 4725,
+          "digest": "sha256:a23c0ec563b1c2a2e93e38bda0dd76b5d79d4d688ff5ff1808e211496ecd34a2"
+        },
+        {
+          "id": 633345001,
+          "name": "wal2json-wal2json_2_7-pg14-windows-x64.zip",
+          "size": 29464,
+          "digest": "sha256:6e4f549c4c43e1695ea400bd045d412b4bec54e13b8be1dd6bdd257d0e7a26b0"
+        },
+        {
+          "id": 633344998,
+          "name": "wal2json-wal2json_2_7-pg15-windows-x64.spdx.json",
+          "size": 2455,
+          "digest": "sha256:60c36d49580c62cf3952ee68615becaeab13fa9a4829c36d84d9648581764cc1"
+        },
+        {
+          "id": 633345010,
+          "name": "wal2json-wal2json_2_7-pg15-windows-x64.vulnerabilities.json",
+          "size": 4726,
+          "digest": "sha256:6e8d3e1999b5621eb3b6f9eaee17cf0fd42f484b9ebe63bf9b375162f2688f9f"
+        },
+        {
+          "id": 633345012,
+          "name": "wal2json-wal2json_2_7-pg15-windows-x64.zip",
+          "size": 29435,
+          "digest": "sha256:fb11e93550a6e413dab55d9688fb64017e0a0ca63bdd4e009d125176b00548f2"
+        },
+        {
+          "id": 633345014,
+          "name": "wal2json-wal2json_2_7-pg16-windows-x64.spdx.json",
+          "size": 2455,
+          "digest": "sha256:aeef2c0c7344c1aeccc7505fe50018b9945a198c46d9627fb915777cd45610dc"
+        },
+        {
+          "id": 633345015,
+          "name": "wal2json-wal2json_2_7-pg16-windows-x64.vulnerabilities.json",
+          "size": 4726,
+          "digest": "sha256:aa994582dc33715ac98fb2af15151526485855dab0ad9d7d4bbc8a350e1c95e3"
+        },
+        {
+          "id": 633345023,
+          "name": "wal2json-wal2json_2_7-pg16-windows-x64.zip",
+          "size": 29361,
+          "digest": "sha256:3d13ec8d8797f5808d896f5b28b0a8a069fa4e183d57acb5b84bd98ca4409545"
+        },
+        {
+          "id": 633345031,
+          "name": "wal2json-wal2json_2_7-pg17-windows-x64.spdx.json",
+          "size": 2455,
+          "digest": "sha256:14788d5e60f41c8de5bfe464e93cb1898777e02b067c4dbe5739026504977a84"
+        },
+        {
+          "id": 633345037,
+          "name": "wal2json-wal2json_2_7-pg17-windows-x64.vulnerabilities.json",
+          "size": 4726,
+          "digest": "sha256:66bce12cc097f733ba5eb35e1f89618091c3866de7303b0785a666a8b9caa77d"
+        },
+        {
+          "id": 633345034,
+          "name": "wal2json-wal2json_2_7-pg17-windows-x64.zip",
+          "size": 29339,
+          "digest": "sha256:933de356db8b40faccdcef183863a6e2b6a8864a4353ffc311db65e644259515"
+        },
+        {
+          "id": 633345040,
+          "name": "wal2json-wal2json_2_7-pg18-windows-x64.spdx.json",
+          "size": 2455,
+          "digest": "sha256:a8d8177ae89eace7958d3a772a50139cc965fe9409b0d90d9641e957b6ebbe0a"
+        },
+        {
+          "id": 633345049,
+          "name": "wal2json-wal2json_2_7-pg18-windows-x64.vulnerabilities.json",
+          "size": 4726,
+          "digest": "sha256:61bd6ef199b8160e7d599c622c66f574f09870b06dc87f9ab2c6f35b65c6371b"
+        },
+        {
+          "id": 633345056,
+          "name": "wal2json-wal2json_2_7-pg18-windows-x64.zip",
+          "size": 29313,
+          "digest": "sha256:bd06bc2755c6ef7ebbde4ddcb04cf5e908c7a01ed8336dd869a4ea77cb6afc56"
+        }
+      ]
+    }
+  ]
+}
