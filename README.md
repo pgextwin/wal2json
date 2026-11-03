@@ -15,7 +15,7 @@ Select the ZIP for **your PostgreSQL major version**. Do not mix files built for
 1. Back up your installation and check the [upstream documentation](https://github.com/eulerto/wal2json) for prerequisites.
 2. Stop PostgreSQL before replacing installed files. Unpack the ZIP matching your PostgreSQL major.
 3. Only copy the files actually included in the package.
-4.  wal2json is an output plugin, not a SQL extension: CREATE EXTENSION is not required. Consult upstream instructions for logical decoding setup. Restart PostgreSQL if you changed server configuration.
+4.  wal2json is an output plugin, not a SQL extension: CREATE EXTENSION is not required. Consult upstream instructions for logical decoding setup. Start PostgreSQL after copying the files and applying any required settings.
 
 Check the Release's SHA256SUMS.txt against the downloaded ZIP. Other available release materials can include SPDX SBOMs, vulnerability reports and signed attestations. Test in a non-production environment before deployment.
 
