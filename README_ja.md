@@ -1,13 +1,24 @@
-# wal2json — Windows x64 バイナリ（pgextwin）
+# wal2json — Windows x64 バイナリ
 
 [English](README.md) | 日本語
 
-上流[wal2json](https://github.com/eulerto/wal2json) **2.6**（固定コミット `75629c2e1e81a12350cc9d63782fc53252185d8d`）を基にした、論理デコード出力プラグインの非公式Windows x64バイナリです。
+[wal2json](https://github.com/eulerto/wal2json)の**非公式Windows x64バイナリ**を配布しています。WALの論理デコード結果をJSONとして出力するプラグインです。
 
-**現在の公開Release：** [v2.6-windows.1](https://github.com/pgextwin/wal2json/releases/tag/v2.6-windows.1)。PostgreSQL **14〜18**向けZIPを正式公開しています。PGメジャーを一致させ、SHA256・SPDX SBOM・Grype・証明情報を[pgextwin Pages](https://pgextwin.github.io/website/ja/)で確認してください。上流公式によるWindows配布ではありません。
+## ダウンロードと対応環境
 
-wal2jsonはSQL拡張機能ではないため、**`CREATE EXTENSION`は不要**です。論理レプリケーションスロットから利用し、通常の`shared_preload_libraries`も不要です。Windows CIではPostgreSQL起動、スロット作成、INSERT・UPDATE・DELETEのコミット、3種類のJSONデコード検証、スロット削除までを確認しています。
+[最新の公開Release](https://github.com/pgextwin/wal2json/releases/latest)からダウンロードできます。[過去のReleases](https://github.com/pgextwin/wal2json/releases)も確認できます。PostgreSQL **14〜18**向けの公開状況は[pgextwinカタログ](https://pgextwin.github.io/website/ja/)に掲載しています。
 
-CVE-2026-6471対策を含むPostgreSQL（PG18.6など）では、`output_plugin_libraries`に`wal2json`を明示的に許可する必要があります。`wal_level = logical`、レプリケーションスロット数、実行権限も確認してください。[PostgreSQL公式の論理レプリケーション設定](https://www.postgresql.org/docs/18/runtime-config-replication.html)と[pgextwin Pages](https://pgextwin.github.io/website/ja/)の公開要件を参照してください。
+**利用中のPostgreSQLメジャーバージョンに一致するZIP**を選んでください。異なるメジャー向けのファイルは混在させないでください。PostgreSQL 14は2026年11月12日にコミュニティサポートが終了します。過去の配布ファイルはその後も残る場合があります。
 
-PostgreSQL 14の新規ビルドは公式EOLの**2026-11-12**までとし、公開済みZIPはEOL後も履歴として残します。実運用前に対象環境での互換性とセキュリティを検証してください。
+## インストール
+
+1. 事前にバックアップを取り、[上流ドキュメント](https://github.com/eulerto/wal2json)で必要な環境を確認します。
+2. 既存ファイルの入れ替え前にPostgreSQLを停止し、対応するZIPを展開します。
+3. ZIPに含まれるファイルを、上流の説明に従ってPostgreSQLの該当ディレクトリへ配置してください。
+4.  wal2jsonは通常のSQL拡張機能とは異なり、CREATE EXTENSIONは不要です。論理レプリケーション用の設定・利用手順は上流ドキュメントを確認してください。 サーバー設定を変更した場合はPostgreSQLを再起動します。
+
+ダウンロードしたZIPはReleaseのSHA256SUMS.txtで照合できます。ReleaseによってはSPDX形式のSBOM、脆弱性レポート、署名付き証明も提供されています。本番環境の前に検証環境で動作を確認してください。
+
+## 上流プロジェクトとライセンス
+
+使い方、設定、制限事項は[上流のwal2json](https://github.com/eulerto/wal2json)を参照してください。本配布は上流の公式Windows版ではありません。再配布条件は同梱のライセンス表記に従います。
