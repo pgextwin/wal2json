@@ -9,9 +9,13 @@ if ($expected -cnotmatch '^[a-f0-9]{40}$' -or $config.upstream.repository -cne '
 $actual = (& git -C $UpstreamDir rev-parse HEAD).Trim().ToLowerInvariant()
 if ($LASTEXITCODE -ne 0 -or $actual -cne $expected) { throw "Upstream SHA mismatch: $actual" }
 $pgVersion = (& (Join-Path $PgRoot 'bin/pg_config.exe') --version).Trim()
-if ($LASTEXITCODE -ne 0 -or $pgVersion -notmatch '^PostgreSQL\s+(14|15|16|17|18)(?:\.|\s)') {
+if ($LASTEXITCODE -ne 0 -or $pgVersion -notmatch '^PostgreSQL\s+(14|15|16|17|18|19)(?:\.|\s)') {
     throw "Unsupported PostgreSQL pilot target: $pgVersion"
 }
+$pgMajor = [int]([regex]::Match($pgVersion, '^PostgreSQL\s+([0-9]+)').Groups[1].Value)
+# PostgreSQL 19 headers use C11 keywords (_Noreturn, alignas) that the
+# MSVC default C mode rejects (C2054/C2061 in c.h); PG19 requires C11.
+$stdFlag = if ($pgMajor -ge 19) { '/std:c11 ' } else { '' }
 $source = Join-Path $UpstreamDir 'wal2json.c'
 if (-not (Test-Path $source -PathType Leaf)) { throw 'Missing source' }
 $code = Get-Content $source -Raw
@@ -54,7 +58,7 @@ $lines = @(
     ('call "' + $vsdev + '" -arch=x64 -host_arch=x64'),
     'if errorlevel 1 exit /b %errorlevel%',
     ('cd /d "' + $UpstreamDir + '"'),
-    ('cl /nologo /O2 /MD /DWIN32 /D__WINDOWS__ /DWIN32_NO_STATUS /D_CRT_SECURE_NO_WARNINGS /D_CRT_NONSTDC_NO_WARNINGS /I"{0}" /I"{1}" /I"{2}" /I"{3}" /c "{4}" /Fo"{5}"' -f
+    ('cl ' + $stdFlag + '/nologo /O2 /MD /DWIN32 /D__WINDOWS__ /DWIN32_NO_STATUS /D_CRT_SECURE_NO_WARNINGS /D_CRT_NONSTDC_NO_WARNINGS /I"{0}" /I"{1}" /I"{2}" /I"{3}" /c "{4}" /Fo"{5}"' -f
         (Join-Path $PgRoot 'include/server/port/win32_msvc'),(Join-Path $PgRoot 'include/server/port/win32'),
         (Join-Path $PgRoot 'include/server'),(Join-Path $PgRoot 'include'),$source,$obj),
     'if errorlevel 1 exit /b %errorlevel%',
