@@ -23,5 +23,11 @@
   "license": {
     "verifyAgainstUpstream": true,
     "upstreamPath": "LICENSE"
+  },
+  "watch": {
+    "source": "github",
+    "strategy": "github-releases",
+    "prereleases": false,
+    "stableTagPattern": "^wal2json_(?P<version>[0-9]+_[0-9]+)$"
   }
 }
