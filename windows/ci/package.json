@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "distribution": "dll-only",
+  "files": [
+    {
+      "source": "upstream",
+      "path": "wal2json.dll",
+      "destination": "lib/wal2json.dll",
+      "targets": [
+        "install",
+        "zip"
+      ]
+    },
+    {
+      "source": "license",
+      "path": "LICENSE",
+      "destination": "LICENSE",
+      "targets": [
+        "zip"
+      ]
+    },
+    {
+      "source": "upstream",
+      "path": "README.md",
+      "destination": "UPSTREAM-README.md",
+      "targets": [
+        "zip"
+      ]
+    },
+    {
+      "source": "packaging",
+      "path": "README.md",
+      "destination": "PGEXTWIN-README.md",
+      "targets": [
+        "zip"
+      ]
+    }
+  ],
+  "packageInfo": [
+    "wal2json Windows binary package (unofficial pgextwin release)",
+    "=======================================================",
+    "Upstream repository: {upstreamRepository}",
+    "Upstream ref: {upstreamRef}",
+    "Upstream commit: {upstreamCommit}",
+    "Version: {version}",
+    "PostgreSQL major: {pgMajor}",
+    "PostgreSQL tested: {pgTested}",
+    "Architecture: Windows x64",
+    "Compiler: MSVC",
+    "License: BSD-3-Clause; see LICENSE",
+    "",
+    "This is an unofficial pgextwin Windows binary; not an official upstream distribution.",
+    "Install lib/wal2json.dll in PostgreSQL's lib directory, set wal_level=logical and configure logical replication slots.",
+    "PostgreSQL security-updated versions require output_plugin_libraries to include wal2json.",
+    "This is an output plugin, not a SQL extension: DO NOT run CREATE EXTENSION wal2json.",
+    "Official documentation: https://www.postgresql.org/docs/18/runtime-config-replication.html"
+  ],
+  "packageInfoFinalNewline": true
+}
