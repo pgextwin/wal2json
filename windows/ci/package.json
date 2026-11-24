@@ -50,7 +50,7 @@
     "Install lib/wal2json.dll in PostgreSQL/lib, set wal_level=logical and configure logical replication slots.",
     "PostgreSQL security-updated versions require output_plugin_libraries to include wal2json.",
     "This is an output plugin, not a SQL extension: DO NOT run CREATE EXTENSION wal2json.",
-    "Official documentation: https://www.postgresql.org/docs/{pgMajor}/runtime-config-replication.html"
+    "Official documentation: https://www.postgresql.org/docs/18/runtime-config-replication.html"
   ],
   "packageInfoFinalNewline": false
 }
